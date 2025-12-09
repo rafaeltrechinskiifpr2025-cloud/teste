@@ -238,23 +238,33 @@
       floating.style.pointerEvents = 'auto';
     }
 
-    /* Função: apenas fixa a badge, sem reposicionar */
-    function fixBadgePosition(){
+    /* Função: posiciona a badge usando o mesmo sistema da imagem 143713,
+       tomando o primeiro .profile-card como referência */
+    function alignBadgeAboveProfile(){
+      const ref = document.querySelector('.profile-card');
       const badge = document.querySelector('.badge-title');
-      if(!badge) return;
+      if(!ref || !badge) return;
 
-      badge.style.position = 'fixed'; 
+      const refRect = ref.getBoundingClientRect();
+      const refCenterY = refRect.top + refRect.height / 2;
+
+      badge.style.position = 'fixed';
+      badge.style.left = '50%';
+      badge.style.transform = 'translateX(-50%)';
+      // aplica o mesmo deslocamento vertical usado para a imagem (subir ~50px)
+      badge.style.top = Math.round(refCenterY - 50) + 'px';
       badge.style.zIndex = 9999;
-      
-      // Ajuste manual da posição onde você quer que ela fique:
-      badge.style.left = '100px'; 
-      badge.style.top = '170px';
+      badge.style.pointerEvents = 'auto';
     }
 
-    // Executa apenas 1 vez
-    window.addEventListener('load', fixBadgePosition);
+    window.addEventListener('load', align141259);
+    window.addEventListener('resize', align141259);
+    window.addEventListener('scroll', align141259);
+
+    window.addEventListener('load', alignBadgeAboveProfile);
+    window.addEventListener('resize', alignBadgeAboveProfile);
+    window.addEventListener('scroll', alignBadgeAboveProfile);
 
   </script>
 </body>
 </html>
-    
