@@ -235,6 +235,8 @@
       const refRect = ref.getBoundingClientRect();
       const refCenterY = refRect.top + refRect.height / 2;
 
+      
+
       floating.style.position = 'fixed';
       floating.style.left = '50%';
       floating.style.transform = 'translateX(-50%)';
@@ -253,8 +255,11 @@
       const refRect = ref.getBoundingClientRect();
       const refCenterY = refRect.top + refRect.height / 2;
 
+      const refCenterX = refRect.left + refRect.width / 2;
+
+
       badge.style.position = 'fixed';
-      badge.style.left = '50%';
+      badge.style.left = Math.round(refCenterX -170) + 'px';
       badge.style.transform = 'translateX(-50%)';
       // aplica o mesmo deslocamento vertical usado para a imagem (subir ~50px)
       badge.style.top = Math.round(refCenterY -170) + 'px';
